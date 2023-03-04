@@ -43,6 +43,8 @@ namespace PushNotificationDemoMAUI.Platforms.Android.Services
 
             var intent = new Intent(this, typeof(MainActivity));
             intent.AddFlags(ActivityFlags.ClearTop);
+            intent.AddFlags(ActivityFlags.SingleTop);
+
 
             foreach (var key in data.Keys)
             {

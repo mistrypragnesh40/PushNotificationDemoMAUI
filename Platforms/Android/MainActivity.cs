@@ -1,6 +1,9 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using CommunityToolkit.Mvvm.Messaging;
+using PushNotificationDemoMAUI.Models;
 
 namespace PushNotificationDemoMAUI;
 
@@ -13,23 +16,31 @@ public class MainActivity : MauiAppCompatActivity
     protected override void OnCreate(Bundle savedInstanceState)
     {
         base.OnCreate(savedInstanceState);
-        if (Intent.Extras != null)
+       
+        CreateNotificationChannel();
+    }
+
+    protected override void OnNewIntent(Intent intent)
+    {
+        base.OnNewIntent(intent);
+
+        if (intent.Extras != null)
         {
-            foreach(var key in Intent.Extras.KeySet())
+            foreach (var key in intent.Extras.KeySet())
             {
-                if(key== "NavigationID")
+                if (key == "NavigationID")
                 {
-                    string idValue = Intent.Extras.GetString(key);
+                    string idValue = intent.Extras.GetString(key);
                     if (Preferences.ContainsKey("NavigationID"))
                         Preferences.Remove("NavigationID");
 
                     Preferences.Set("NavigationID", idValue);
+
+                    WeakReferenceMessenger.Default.Send(new PushNotificationReceived("test"));
                 }
             }
         }
-        CreateNotificationChannel();
     }
-
 
     private void CreateNotificationChannel()
     {
