@@ -53,7 +53,7 @@ namespace PushNotificationDemoMAUI.Platforms.Android.Services
             }
 
             var pendingIntent = PendingIntent.GetActivity(this,
-                MainActivity.NotificationID, intent, PendingIntentFlags.OneShot);
+                MainActivity.NotificationID, intent, PendingIntentFlags.OneShot | PendingIntentFlags.Immutable);
 
             var notificationBuilder = new NotificationCompat.Builder(this, MainActivity.Channel_ID)
                 .SetContentTitle(title)

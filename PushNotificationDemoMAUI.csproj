@@ -66,6 +66,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<None Remove="Platforms\Android\google-services.json" />
+		<None Remove="Resources\Raw\admin_sdk.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -78,6 +79,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+	  <PackageReference Include="FirebaseAdmin" Version="2.3.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	  <PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging" Version="8.10.0.3" />
 	</ItemGroup>

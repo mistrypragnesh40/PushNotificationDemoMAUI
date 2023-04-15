@@ -2,6 +2,8 @@
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using AndroidX.Core.App;
+using AndroidX.Core.Content;
 using CommunityToolkit.Mvvm.Messaging;
 using PushNotificationDemoMAUI.Models;
 
@@ -11,12 +13,16 @@ namespace PushNotificationDemoMAUI;
 public class MainActivity : MauiAppCompatActivity
 {
     internal static readonly string Channel_ID = "TestChannel";
-    internal static readonly int NotificationID= 101;
+    internal static readonly int NotificationID = 101;
 
     protected override void OnCreate(Bundle savedInstanceState)
     {
         base.OnCreate(savedInstanceState);
-       
+        if (ContextCompat.CheckSelfPermission(this, Android.Manifest.Permission.PostNotifications) == Permission.Denied)
+        {
+            ActivityCompat.RequestPermissions(this, new String[] {  Android.Manifest.Permission.PostNotifications }, 1);
+        }
+
         CreateNotificationChannel();
     }
 
